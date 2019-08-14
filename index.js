@@ -6,31 +6,53 @@ let operandFlag = false;
 let firstOperator = '';
 let secondOperator = '';
 let displayValue = "";
-let a = '';
-let b = '';
+let aA = '';
+let bB = '';
 
 
-function add(a, b) {return parseInt(a) + parseInt(b)};
-function subtract(a, b) {return parseInt(a) - parseInt(b)};
-function multiply(a, b) {return parseInt(a) * parseInt(b)};
-function divide(a, b) {return parseInt(a) / parseInt(b)};
+function add(a, b) {return parseFloat(aA) + parseFloat(bB)};
+function subtract(a, b) {return parseFloat(aA) - parseFloat(bB)};
+function multiply(a, b) {return parseFloat(aA) * parseFloat(bB)};
+function divide(a, b) {return parseFloat(aA) / parseFloat(bB)};
 function operate(a, b, operator) {
 	switch (operator) {
 		case '+':
-			displayValue = add(a, b);
-			display(displayValue)
-			a = displayValue;
-			b = '';
-			console.log('a', a)
-			console.log('b', b)
+			displayValue = add(aA, bB);
+			display(displayValue);
+			aA = displayValue;
+			bB = '';
 			firstOperator = secondOperator;
 			secondOperator = '';
-			displayValue += firstOperator
-			console.log('firstOperator', firstOperator)
-			console.log('secondOperator', secondOperator)
-			console.log('displayValue', displayValue)
+			displayValue += firstOperator;
 			break;
-		default:
+		case '-':
+			displayValue = subtract(aA, bB);
+			display(displayValue);
+			aA = displayValue;
+			bB = '';
+			firstOperator = secondOperator;
+			secondOperator = '';
+			displayValue += firstOperator;
+			break;
+		case '*':
+			displayValue = multiply(aA, bB);
+			display(displayValue);
+			aA = displayValue;
+			bB = '';
+			firstOperator = secondOperator;
+			secondOperator = '';
+			displayValue += firstOperator;
+			break;
+		case '/':
+			displayValue = divide(aA, bB);
+			display(displayValue);
+			aA = displayValue;
+			bB = '';
+			firstOperator = secondOperator;
+			secondOperator = '';
+			displayValue += firstOperator;
+			break;
+		default:   
 			console.log('not a plus')
 	}
 };
@@ -43,7 +65,7 @@ buttons.forEach(function(btn) {
 		let text = btn.textContent;
 		if(parseInt(text) > -1 && parseInt(text) < 10) {
 			if(firstOperator !== '') {
-				b += text;
+				bB += text;
 				displayValue += text;
 				display(displayValue);
 			} else {
@@ -55,11 +77,10 @@ buttons.forEach(function(btn) {
 		} else if(operators.indexOf(text) !== -1) {
 			if(firstOperator !== '') {
 				secondOperator = text;
-				operate(a, b, firstOperator)
-				// displayValue += text;
+				operate(aA, bB, firstOperator)
 			} else {
 				console.log('there is now one operator')
-				a = displayValue;
+				aA = displayValue;
 				firstOperator = text;
 				displayValue += text;
 				display(displayValue)
