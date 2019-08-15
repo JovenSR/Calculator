@@ -2,7 +2,6 @@ const buttons = document.querySelectorAll('button');
 let displayBottom = document.querySelector('#displayBottom');
 let displayTop = document.querySelector('#displayTop');
 const operators = ['+', '-', '*', '/'];
-let operandFlag = false;
 let firstOperator = '';
 let secondOperator = '';
 let displayValue = "";
@@ -86,9 +85,18 @@ buttons.forEach(function(btn) {
 				display(displayValue)
 			}
 		} else if(text === "AC") {
-			console.log('Clear')
+			displayValue = '';
+			display(displayValue);
+			aA = '';
+			bB = '';
+			firstOperator = '';
+			secondOperator = '';
 		} else {
-			console.log("operating")
+			if(aA !== '' && bB !== '' && firstOperator !== '') {
+				operate(aA, bB, firstOperator)
+			} else  {
+				return;
+			}
 		}
 	})
 })
