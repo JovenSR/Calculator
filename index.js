@@ -63,7 +63,7 @@ buttons.forEach(function(btn) {
 	btn.addEventListener('click', (e) => {
 		let text = btn.textContent;
 		if(parseInt(text) > -1 && parseInt(text) < 10) {
-			if(firstOperator !== '') {
+		 	if(firstOperator !== '') {
 				bB += text;
 				displayValue += text;
 				display(displayValue);
@@ -72,11 +72,22 @@ buttons.forEach(function(btn) {
 				display(displayValue)
 			}
 		} else if(text === ".") {
-			console.log(text)
+			if((firstOperator === '' && displayValue.indexOf(text) !== -1) || (bB.indexOf(text) !== -1)) {
+				return;
+			} else if(firstOperator !== '') {
+					bB += text;
+					displayValue += text;
+					display(displayValue);
+			} else {
+				displayValue += text;
+				display(displayValue)
+			}
 		} else if(operators.indexOf(text) !== -1) {
-			if(firstOperator !== '') {
-				secondOperator = text;
-				operate(aA, bB, firstOperator)
+			if(displayValue[displayValue.length -1] === '+' || displayValue[displayValue.length -1] === '-' || displayValue[displayValue.length -1] === '*' || displayValue[displayValue.length -1] === '/') {
+				return;
+			} else if(firstOperator !== '') {
+					secondOperator = text;
+					operate(aA, bB, firstOperator)
 			} else {
 				console.log('there is now one operator')
 				aA = displayValue;
